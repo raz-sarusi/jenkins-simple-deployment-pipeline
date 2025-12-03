@@ -1,0 +1,10 @@
+---
+- name: Deploy Nginx Docker container
+  hosts: webservers
+  become: yes
+
+  vars:
+    docker_image: "razsarusi/nginx-test:latest"
+
+  roles:
+    - web
