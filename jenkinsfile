@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "razsarusi/nginx-test
+        IMAGE_NAME = "razsarusi/nginx-test"
         IMAGE_TAG  = "latest"
     }
 
