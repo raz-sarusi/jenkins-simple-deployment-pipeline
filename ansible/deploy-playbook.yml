@@ -1,10 +1,24 @@
 ---
 - name: Deploy Nginx Docker container
   hosts: webservers
-  become: yes
+  become: false
+  gather_facts: true
 
   vars:
     docker_image: "razsarusi/nginx-test:latest"
 
-  roles:
-    - web
+  tasks:
+    - name: Stop existing container if exists
+      command: docker stop mynginx
+      ignore_errors: yes
+
+    - name: Remove existing container if exists
+      command: docker rm mynginx
+      ignore_errors: yes
+
+    - name: Pull latest image
+      command: docker pull {{ docker_image }}
+
+    - name: Run Nginx container
+      command: docker run -d --name mynginx -p 80:80 {{ docker_image }}
+
